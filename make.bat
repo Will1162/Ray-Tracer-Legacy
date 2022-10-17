@@ -4,6 +4,7 @@ set showDebugCmd=1
 
 cd build
 del RayTracer-x64.exe
+del output.bmp
 
 cls
 
@@ -12,6 +13,7 @@ echo Building...
 if %showDebugCmd%==0 (
 	g++ -std=c++17 -O2 ^
 	../src/main.cpp ^
+	../src/bitmap-io.cpp ^
 	-o RayTracer-x64.exe ^
 	-mwindows
 )
@@ -19,6 +21,7 @@ if %showDebugCmd%==0 (
 if %showDebugCmd%==1 (
 	g++ -std=c++17 -O2 ^
 	../src/main.cpp ^
+	../src/bitmap-io.cpp ^
 	-o RayTracer-x64.exe ^
 	-g -Wall
 )
@@ -28,6 +31,7 @@ echo.
 
 if exist RayTracer-x64.exe (
 	RayTracer-x64.exe
+	output.bmp
 )
 
 cd ../
