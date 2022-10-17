@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 #include "bitmap-io.hpp"
+#include "vec3.hpp"
 
 const int IMAGE_WIDTH = 768;
 const int IMAGE_HEIGHT = 768;
