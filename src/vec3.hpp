@@ -3,15 +3,20 @@
 
 #include <cmath>
 
-class vec3
+class Vec3
 {
 	public:
 		float x, y, z;
 
-		vec3::vec3(float x, float y, float z);
-		~vec3();
+		Vec3(float x, float y, float z)
+		{
+			this->x = x;
+			this->y = y;
+			this->z = z;
+		}
+		~Vec3(){};
 
-		vec3& operator+=(const vec3 &v)
+		Vec3& operator+=(const Vec3 &v)
 		{
 			x += v.x;
 			y += v.y;
@@ -19,7 +24,7 @@ class vec3
 			return *this;
 		}
 
-		vec3& operator*=(const double t)
+		Vec3& operator*=(const double t)
 		{
 			x *= t;
 			y *= t;
@@ -27,7 +32,7 @@ class vec3
 			return *this;
 		}
 
-		vec3& operator/=(const double t)
+		Vec3& operator/=(const double t)
 		{
 			return *this *= 1 / t;
 		}
@@ -43,54 +48,54 @@ class vec3
 		}
 };
 
-using point3 = vec3;
-using color = vec3;
+using Point3D = Vec3;
+using Colour = Vec3;
 
-inline vec3 operator+(const vec3 &u, const vec3 &v)
+inline Vec3 operator+(const Vec3 &u, const Vec3 &v)
 {
-	return vec3(u.x + v.x, u.y + v.y, u.z + v.z);
+	return Vec3(u.x + v.x, u.y + v.y, u.z + v.z);
 }
 
-inline vec3 operator-(const vec3 &u, const vec3 &v)
+inline Vec3 operator-(const Vec3 &u, const Vec3 &v)
 {
-	return vec3(u.x - v.x, u.y - v.y, u.z - v.z);
+	return Vec3(u.x - v.x, u.y - v.y, u.z - v.z);
 }
 
-inline vec3 operator*(const vec3 &u, const vec3 &v)
+inline Vec3 operator*(const Vec3 &u, const Vec3 &v)
 {
-	return vec3(u.x * v.x, u.y * v.y, u.z * v.z);
+	return Vec3(u.x * v.x, u.y * v.y, u.z * v.z);
 }
 
-inline vec3 operator*(double t, const vec3 &v)
+inline Vec3 operator*(double t, const Vec3 &v)
 {
-	return vec3(t * v.x, t * v.y, t * v.z);
+	return Vec3(t * v.x, t * v.y, t * v.z);
 }
 
-inline vec3 operator*(const vec3 &v, double t)
+inline Vec3 operator*(const Vec3 &v, double t)
 {
 	return t * v;
 }
 
-inline vec3 operator/(vec3 v, double t)
+inline Vec3 operator/(Vec3 v, double t)
 {
 	return (1 / t) * v;
 }
 
-inline double dot(const vec3 &u, const vec3 &v)
+inline double dot(const Vec3 &u, const Vec3 &v)
 {
 	return u.x * v.x
 		 + u.y * v.y
 		 + u.z * v.z;
 }
 
-inline vec3 cross(const vec3 &u, const vec3 &v)
+inline Vec3 cross(const Vec3 &u, const Vec3 &v)
 {
-	return vec3(u.y * v.z - u.z * v.y,
+	return Vec3(u.y * v.z - u.z * v.y,
 				u.z * v.x - u.x * v.z,
 				u.x * v.y - u.y * v.x);
 }
 
-inline vec3 unit_vector(vec3 v)
+inline Vec3 unit_vector(Vec3 v)
 {
 	return v / v.length();
 }

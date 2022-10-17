@@ -1,15 +1,14 @@
 #include <stdio.h>
 
 #include "bitmap-io.hpp"
+#include "colour.hpp"
+#include "globals.hpp"
 #include "vec3.hpp"
 
-const int IMAGE_WIDTH = 768;
-const int IMAGE_HEIGHT = 768;
-const int BYTES_PER_PIXEL = 3;
+unsigned char image[IMAGE_HEIGHT][IMAGE_WIDTH][BYTES_PER_PIXEL];
 
 int main()
 {
-	unsigned char image[IMAGE_HEIGHT][IMAGE_WIDTH][BYTES_PER_PIXEL];
 	char* imageFileName = (char*) "output.bmp";
 
 	int rowsDone = 0;
@@ -17,9 +16,12 @@ int main()
 	{
 		for ( int j = 0; j < IMAGE_WIDTH; j++)
 		{
-			image[i][j][2] = (unsigned char) ( i * 255 / IMAGE_HEIGHT );
-			image[i][j][1] = (unsigned char) ( j * 255 / IMAGE_WIDTH );
-			image[i][j][0] = (unsigned char) ((i + j) * 255 / (IMAGE_HEIGHT+IMAGE_WIDTH));
+			Colour col(
+				(double)i / (double)IMAGE_WIDTH * 255,
+				(double)j / (double)IMAGE_WIDTH * 255,
+				(double)(i + j) * 0.5 / (double)IMAGE_WIDTH * 255);
+
+			WriteColour(i, j, IMAGE_WIDTH, IMAGE_HEIGHT, col);
 		}
 		
 		rowsDone++;
