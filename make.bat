@@ -14,6 +14,7 @@ if %showDebugCmd%==0 (
 	g++ -std=c++17 -O2 ^
 	../src/main.cpp ^
 	../src/bitmap_io.cpp ^
+	../src/camera.cpp ^
 	../src/colour.cpp ^
 	../src/hittable_object_list.cpp ^
 	../src/ray.cpp ^
@@ -28,6 +29,7 @@ if %showDebugCmd%==1 (
 	../src/main.cpp ^
 	../src/bitmap_io.cpp ^
 	../src/colour.cpp ^
+	../src/camera.cpp ^
 	../src/hittable_object_list.cpp ^
 	../src/ray.cpp ^
 	../src/sphere.cpp ^

@@ -9,9 +9,17 @@ extern unsigned char image[IMAGE_HEIGHT][IMAGE_WIDTH][BYTES_PER_PIXEL];
 
 void WriteColour(int x, int y, int width, int height, Colour pixelColour)
 {
-	image[x][y][2] = (unsigned char) pixelColour.x;
-	image[x][y][1] = (unsigned char) pixelColour.y;
-	image[x][y][0] = (unsigned char) pixelColour.z;
+	double r = pixelColour.x;
+	double g = pixelColour.y;
+	double b = pixelColour.z;
+	double scale = 1.0 / SAMPLES_PER_PIXEL;
+	r *= scale;
+	g *= scale;
+	b *= scale;
+
+	image[x][y][2] = (unsigned char)r;
+	image[x][y][1] = (unsigned char)g;
+	image[x][y][0] = (unsigned char)b;
 }
 
 #endif

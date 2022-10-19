@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 #include "bitmap_io.hpp"
+#include "camera.hpp"
 #include "colour.hpp"
 #include "globals.hpp"
 #include "hittable_object_list.hpp"
@@ -14,31 +15,27 @@ int main()
 {
 	char* imageFileName = (char*)"output.bmp";
 
-	double viewportHeight = 2.0;
-	double viewportWidth = ASPECT_RATIO * viewportHeight;
-	double focalLength = 1.0;
-
 	HittableObjectList world;
 	world.Add(std::make_shared<Sphere>(Point3D(0, 0, -1), 0.5));
 	world.Add(std::make_shared<Sphere>(Point3D(0, -100.5, -1), 100));
 
-	Point3D origin = Point3D(0, 0, 0);
-	Vec3 horizontal = Vec3(viewportWidth, 0, 0);
-	Vec3 vertical = Vec3(0, viewportHeight, 0);
-	Vec3 lowerLeftCorner = origin - horizontal / 2 - vertical / 2 - Vec3(0, 0, focalLength);
+	Camera cam;
 
 	int rowsDone = 0;
 	for (int i = 0; i < IMAGE_HEIGHT; i++)
 	{
 		for (int j = 0; j < IMAGE_WIDTH; j++)
 		{
-			double u = double(j) / (IMAGE_WIDTH - 1);
-			double v = double(i) / (IMAGE_HEIGHT - 1);
+			Colour pixelColour(0, 0, 0);
+			for (int k = 0; k < SAMPLES_PER_PIXEL; k++)
+			{
+				double u = (j + RandDouble()) / (IMAGE_WIDTH - 1);
+				double v = (i + RandDouble()) / (IMAGE_HEIGHT - 1);
+				Ray r = cam.GetRay(u, v);
+				pixelColour += RayColour(r, world);
+			}
 
-			Ray ray = Ray(origin, lowerLeftCorner + u * horizontal + v * vertical - origin);
-			Colour col = RayColour(ray, world);
-
-			WriteColour(i, j, IMAGE_WIDTH, IMAGE_HEIGHT, col * 255.0);
+			WriteColour(i, j, IMAGE_WIDTH, IMAGE_HEIGHT, pixelColour * 255.0);
 		}
 		
 		rowsDone++;
