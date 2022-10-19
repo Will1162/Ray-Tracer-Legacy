@@ -5,7 +5,7 @@
 #include <limits>
 
 #define ASPECT_RATIO 1.7777777 // 16:9
-#define IMAGE_WIDTH 800
+#define IMAGE_WIDTH 400
 #define IMAGE_HEIGHT (int)(IMAGE_WIDTH / ASPECT_RATIO)
 #define BYTES_PER_PIXEL 3
 #define SAMPLES_PER_PIXEL 100

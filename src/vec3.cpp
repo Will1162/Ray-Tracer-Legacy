@@ -95,3 +95,17 @@ Vec3 RandomInUnitSphere()
 		return p;
 	}
 }
+
+Vec3 RandomInHemisphere(const Vec3 &normal)
+{
+	Vec3 inUnitSphere = RandomInUnitSphere();
+	if (Dot(inUnitSphere, normal) > 0.0)
+		return inUnitSphere;
+	else
+		return Vec3(0.0, 0.0, 0.0) - inUnitSphere;
+}
+
+Vec3 RandomUnitVector()
+{
+	return UnitVector(RandomInUnitSphere());
+}

@@ -49,6 +49,8 @@ double Dot(const Vec3 &u, const Vec3 &v);
 Vec3 Cross(const Vec3 &u, const Vec3 &v);
 Vec3 UnitVector(Vec3 v);
 Vec3 RandomInUnitSphere();
+Vec3 RandomInHemisphere(const Vec3 &normal);
+Vec3 RandomUnitVector();
 
 using Point3D = Vec3;
 using Colour = Vec3;
