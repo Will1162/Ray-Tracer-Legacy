@@ -1,4 +1,4 @@
-#include "bitmap-io.hpp"
+#include "bitmap_io.hpp"
 
 void generateBitmapImage (unsigned char* image, int height, int width, char* imageFileName)
 {

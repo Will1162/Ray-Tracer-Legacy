@@ -1,20 +1,26 @@
 #include <stdio.h>
 
-#include "bitmap-io.hpp"
+#include "bitmap_io.hpp"
 #include "colour.hpp"
-#include "ray.hpp"
 #include "globals.hpp"
+#include "hittable_object_list.hpp"
+#include "ray.hpp"
+#include "sphere.hpp"
 #include "vec3.hpp"
 
 unsigned char image[IMAGE_WIDTH][IMAGE_HEIGHT][BYTES_PER_PIXEL];
 
 int main()
 {
-	char* imageFileName = (char*) "output.bmp";
+	char* imageFileName = (char*)"output.bmp";
 
 	double viewportHeight = 2.0;
 	double viewportWidth = ASPECT_RATIO * viewportHeight;
 	double focalLength = 1.0;
+
+	HittableObjectList world;
+	world.Add(std::make_shared<Sphere>(Point3D(0, 0, -1), 0.5));
+	world.Add(std::make_shared<Sphere>(Point3D(0, -100.5, -1), 100));
 
 	Point3D origin = Point3D(0, 0, 0);
 	Vec3 horizontal = Vec3(viewportWidth, 0, 0);
@@ -30,7 +36,7 @@ int main()
 			double v = double(i) / (IMAGE_HEIGHT - 1);
 
 			Ray ray = Ray(origin, lowerLeftCorner + u * horizontal + v * vertical - origin);
-			Colour col = RayColour(ray);
+			Colour col = RayColour(ray, world);
 
 			WriteColour(i, j, IMAGE_WIDTH, IMAGE_HEIGHT, col * 255.0);
 		}
@@ -39,7 +45,7 @@ int main()
 		printf("Image done: %d%%\r", (int)(((float)rowsDone / (float)IMAGE_HEIGHT) * 100));
 	}
 
-	generateBitmapImage((unsigned char*) image, IMAGE_HEIGHT, IMAGE_WIDTH, imageFileName);
+	generateBitmapImage((unsigned char*)image, IMAGE_HEIGHT, IMAGE_WIDTH, imageFileName);
 
 	return 0;
 }

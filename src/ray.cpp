@@ -1,5 +1,7 @@
 #include <cmath>
 
+#include "globals.hpp"
+#include "hittable_object.hpp"
 #include "ray.hpp"
 
 Ray::Ray(const Point3D &origin, const Vec3 &direction)
@@ -13,17 +15,16 @@ Point3D Ray::At(double t) const
 	return origin + t * direction;
 }
 
-Colour RayColour(const Ray &r)
+Colour RayColour(const Ray& ray, const HittableObject& world)
 {
-	double t = HitSphere(Point3D(0, 0, -1), 0.5, r);
-	if (t > 0.0)
+	HitRecord rec;
+	if (world.Hit(ray, 0, MATH_INF, rec))
 	{
-		Vec3 N = UnitVector(r.At(t) - Vec3(0, 0, -1));
-		return 0.5 * Colour(N.x + 1, N.y + 1, N.z + 1);
+		return 0.5 * (rec.normal + Colour(1.0, 1.0, 1.0));
 	}
 
-	Vec3 unitDir = UnitVector(r.direction);
-	t = 0.5 * (unitDir.y + 1.0);
+	Vec3 unitDirection = UnitVector(ray.direction);
+	double t = 0.5 * (unitDirection.y + 1.0);
 	return (1.0 - t) * Colour(1.0, 1.0, 1.0) + t * Colour(0.5, 0.7, 1.0);
 }
 

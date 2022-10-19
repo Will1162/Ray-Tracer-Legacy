@@ -3,6 +3,8 @@
 
 #include "vec3.hpp"
 
+class HittableObject;
+
 class Ray
 {
 	public:
@@ -13,7 +15,7 @@ class Ray
 		Point3D At(double t) const;
 };
 
-Colour RayColour(const Ray &r);
+Colour RayColour(const Ray& ray, const HittableObject& world);
 double HitSphere(const Point3D& centre, float radius, const Ray& ray);
 
 #endif
