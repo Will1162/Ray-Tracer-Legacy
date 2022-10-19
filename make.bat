@@ -15,6 +15,7 @@ if %showDebugCmd%==0 (
 	../src/main.cpp ^
 	../src/bitmap-io.cpp ^
 	../src/colour.cpp ^
+	../src/ray.cpp ^
 	../src/vec3.cpp ^
 	-o RayTracer-x64.exe ^
 	-mwindows
@@ -25,6 +26,7 @@ if %showDebugCmd%==1 (
 	../src/main.cpp ^
 	../src/bitmap-io.cpp ^
 	../src/colour.cpp ^
+	../src/ray.cpp ^
 	../src/vec3.cpp ^
 	-o RayTracer-x64.exe ^
 	-g -Wall
