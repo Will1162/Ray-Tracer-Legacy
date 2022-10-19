@@ -15,7 +15,7 @@ class Ray
 		Point3D At(double t) const;
 };
 
-Colour RayColour(const Ray& ray, const HittableObject& world);
+Colour RayColour(const Ray& ray, const HittableObject& world, int depth);
 double HitSphere(const Point3D& centre, float radius, const Ray& ray);
 
 #endif

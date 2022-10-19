@@ -15,12 +15,18 @@ Point3D Ray::At(double t) const
 	return origin + t * direction;
 }
 
-Colour RayColour(const Ray& ray, const HittableObject& world)
+Colour RayColour(const Ray& ray, const HittableObject& world, int depth)
 {
+	if (depth <= 0)
+	{
+		return Colour(0, 0, 0);
+	}
+
 	HitRecord rec;
 	if (world.Hit(ray, 0, MATH_INF, rec))
 	{
-		return 0.5 * (rec.normal + Colour(1.0, 1.0, 1.0));
+		Point3D target = rec.point + rec.normal + RandomInUnitSphere();
+		return 0.5 * RayColour(Ray(rec.point, target - rec.point), world, depth - 1);
 	}
 
 	Vec3 unitDirection = UnitVector(ray.direction);

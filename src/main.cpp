@@ -32,7 +32,7 @@ int main()
 				double u = (j + RandDouble()) / (IMAGE_WIDTH - 1);
 				double v = (i + RandDouble()) / (IMAGE_HEIGHT - 1);
 				Ray r = cam.GetRay(u, v);
-				pixelColour += RayColour(r, world);
+				pixelColour += RayColour(r, world, MAX_DEPTH);
 			}
 
 			WriteColour(i, j, IMAGE_WIDTH, IMAGE_HEIGHT, pixelColour * 255.0);

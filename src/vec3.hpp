@@ -1,6 +1,8 @@
 #ifndef WB_RT_VEC3_HPP
 #define WB_RT_VEC3_HPP
 
+#include "globals.hpp"
+
 class Vec3
 {
 	public:
@@ -33,6 +35,8 @@ class Vec3
 		
 		double Length() const;
 		double LengthSquared() const;
+		Vec3 Random();
+		Vec3 Random(double min, double max);
 };
 
 Vec3 operator+(const Vec3 &u, const Vec3 &v);
@@ -44,6 +48,7 @@ Vec3 operator/(Vec3 v, double t);
 double Dot(const Vec3 &u, const Vec3 &v);
 Vec3 Cross(const Vec3 &u, const Vec3 &v);
 Vec3 UnitVector(Vec3 v);
+Vec3 RandomInUnitSphere();
 
 using Point3D = Vec3;
 using Colour = Vec3;

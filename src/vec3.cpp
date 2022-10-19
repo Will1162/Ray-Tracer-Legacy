@@ -26,6 +26,16 @@ double Vec3::LengthSquared() const
 	return x * x + y * y + z * z;
 }
 
+Vec3 Random()
+{
+	return Vec3(RandDouble(), RandDouble(), RandDouble());
+}
+
+Vec3 Random(double min, double max)
+{
+	return Vec3(RandDouble(min, max), RandDouble(min, max), RandDouble(min, max));
+}
+
 Vec3 operator+(const Vec3 &u, const Vec3 &v)
 {
 	return Vec3(u.x + v.x, u.y + v.y, u.z + v.z);
@@ -73,4 +83,15 @@ Vec3 Cross(const Vec3 &u, const Vec3 &v)
 Vec3 UnitVector(Vec3 v)
 {
 	return v / v.Length();
+}
+
+Vec3 RandomInUnitSphere()
+{
+	while (true)
+	{
+		Vec3 p = Random(-1, 1);
+		if (p.LengthSquared() >= 1)
+			continue;
+		return p;
+	}
 }
