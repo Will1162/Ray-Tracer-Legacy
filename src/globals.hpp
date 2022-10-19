@@ -1,8 +1,8 @@
 #ifndef WB_RT_GLOBALS_HPP
 #define WB_RT_GLOBALS_HPP
 
-#define IMAGE_WIDTH 256
-#define IMAGE_HEIGHT 256
+#define IMAGE_WIDTH 512
+#define IMAGE_HEIGHT 512
 #define BYTES_PER_PIXEL 3
 
 #endif

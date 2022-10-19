@@ -13,6 +13,9 @@ echo Building...
 if %showDebugCmd%==0 (
 	g++ -std=c++17 -O2 ^
 	../src/main.cpp ^
+	../src/bitmap-io.cpp ^
+	../src/colour.cpp ^
+	../src/vec3.cpp ^
 	-o RayTracer-x64.exe ^
 	-mwindows
 )
@@ -20,6 +23,9 @@ if %showDebugCmd%==0 (
 if %showDebugCmd%==1 (
 	g++ -std=c++17 -O2 ^
 	../src/main.cpp ^
+	../src/bitmap-io.cpp ^
+	../src/colour.cpp ^
+	../src/vec3.cpp ^
 	-o RayTracer-x64.exe ^
 	-g -Wall
 )
