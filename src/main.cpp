@@ -35,7 +35,7 @@ int main()
 				pixelColour += RayColour(r, world, MAX_DEPTH);
 			}
 
-			WriteColour(i, j, IMAGE_WIDTH, IMAGE_HEIGHT, pixelColour * 255.0);
+			WriteColour(i, j, IMAGE_WIDTH, IMAGE_HEIGHT, pixelColour);
 		}
 		
 		rowsDone++;

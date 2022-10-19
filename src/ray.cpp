@@ -23,7 +23,7 @@ Colour RayColour(const Ray& ray, const HittableObject& world, int depth)
 	}
 
 	HitRecord rec;
-	if (world.Hit(ray, 0, MATH_INF, rec))
+	if (world.Hit(ray, 0.001, MATH_INF, rec))
 	{
 		Point3D target = rec.point + rec.normal + RandomInUnitSphere();
 		return 0.5 * RayColour(Ray(rec.point, target - rec.point), world, depth - 1);
