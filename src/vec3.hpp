@@ -4,10 +4,10 @@
 class Vec3
 {
 	public:
-		float x, y, z;
+		double x, y, z;
 
 		Vec3();
-		Vec3(float x, float y, float z);
+		Vec3(double x, double y, double z);
 		~Vec3(){};
 
 		Vec3& operator+=(const Vec3 &v)
@@ -41,9 +41,9 @@ Vec3 operator*(const Vec3 &u, const Vec3 &v);
 Vec3 operator*(double t, const Vec3 &v);
 Vec3 operator*(const Vec3 &v, double t);
 Vec3 operator/(Vec3 v, double t);
-double Vec3Dot(const Vec3 &u, const Vec3 &v);
-Vec3 Vec3Cross(const Vec3 &u, const Vec3 &v);
-Vec3 Vec3UnitVector(Vec3 v);
+double Dot(const Vec3 &u, const Vec3 &v);
+Vec3 Cross(const Vec3 &u, const Vec3 &v);
+Vec3 UnitVector(Vec3 v);
 
 using Point3D = Vec3;
 using Colour = Vec3;

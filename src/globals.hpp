@@ -1,8 +1,9 @@
 #ifndef WB_RT_GLOBALS_HPP
 #define WB_RT_GLOBALS_HPP
 
-#define IMAGE_WIDTH 512
-#define IMAGE_HEIGHT 512
+#define ASPECT_RATIO 1.7777777 // 16:9
+#define IMAGE_WIDTH 1600
+#define IMAGE_HEIGHT (int)(IMAGE_WIDTH / ASPECT_RATIO)
 #define BYTES_PER_PIXEL 3
 
 #endif

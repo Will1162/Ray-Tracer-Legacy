@@ -13,4 +13,6 @@ class Ray
 		Point3D At(double t) const;
 };
 
+Colour RayColour(const Ray &r);
+
 #endif
