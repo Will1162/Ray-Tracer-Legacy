@@ -16,12 +16,12 @@ Vec3::Vec3(double x, double y, double z)
 	this->z = z;
 }
 
-double Vec3::length() const
+double Vec3::Length() const
 {
-	return sqrt(length_squared());
+	return sqrt(LengthSquared());
 }
 
-double Vec3::length_squared() const
+double Vec3::LengthSquared() const
 {
 	return x * x + y * y + z * z;
 }
@@ -72,5 +72,5 @@ Vec3 Cross(const Vec3 &u, const Vec3 &v)
 
 Vec3 UnitVector(Vec3 v)
 {
-	return v / v.length();
+	return v / v.Length();
 }

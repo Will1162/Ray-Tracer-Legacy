@@ -14,5 +14,6 @@ class Ray
 };
 
 Colour RayColour(const Ray &r);
+double HitSphere(const Point3D& centre, float radius, const Ray& ray);
 
 #endif

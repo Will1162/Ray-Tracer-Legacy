@@ -31,8 +31,8 @@ class Vec3
 			return *this *= 1 / t;
 		}
 		
-		double length() const;
-		double length_squared() const;
+		double Length() const;
+		double LengthSquared() const;
 };
 
 Vec3 operator+(const Vec3 &u, const Vec3 &v);
