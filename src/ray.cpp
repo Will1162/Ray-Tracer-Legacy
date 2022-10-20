@@ -2,7 +2,14 @@
 
 #include "globals.hpp"
 #include "hittable_object.hpp"
+#include "material.hpp"
 #include "ray.hpp"
+
+Ray::Ray()
+{
+	origin = Point3D(0.0, 0.0, 0.0);
+	direction = Vec3(1.0, 0.0, 0.0);
+}
 
 Ray::Ray(const Point3D &origin, const Vec3 &direction)
 {
@@ -25,16 +32,13 @@ Colour RayColour(const Ray& ray, const HittableObject& world, int depth)
 	HitRecord rec;
 	if (world.Hit(ray, 0.001, MATH_INF, rec))
 	{
-		// random point in unit sphere method
-		// Point3D target = rec.point + rec.normal + RandomInUnitSphere();
-
-		// random unit vector method
-		Point3D target = rec.point + rec.normal + RandomUnitVector();
-
-		// random point in hemisphere method
-		// Point3D target = rec.point + RandomInHemisphere(rec.normal);
-		
-		return 0.5 * RayColour(Ray(rec.point, target - rec.point), world, depth - 1);
+		Ray scattered;
+		Colour attenuation;
+		if (rec.material->Scatter(ray, rec, attenuation, scattered))
+		{
+			return attenuation * RayColour(scattered, world, depth - 1);
+		}
+		return Colour(0, 0, 0);
 	}
 
 	Vec3 unitDirection = UnitVector(ray.direction);

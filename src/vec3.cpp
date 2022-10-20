@@ -26,6 +26,12 @@ double Vec3::LengthSquared() const
 	return x * x + y * y + z * z;
 }
 
+bool Vec3::NearZero() const
+{
+	const double s = 1e-8;
+	return (fabs(x) < s) && (fabs(y) < s) && (fabs(z) < s);
+}
+
 Vec3 Random()
 {
 	return Vec3(RandDouble(), RandDouble(), RandDouble());
@@ -108,4 +114,9 @@ Vec3 RandomInHemisphere(const Vec3 &normal)
 Vec3 RandomUnitVector()
 {
 	return UnitVector(RandomInUnitSphere());
+}
+
+Vec3 Reflect(const Vec3 &v, const Vec3 &n)
+{
+	return v - 2 * Dot(v, n) * n;
 }

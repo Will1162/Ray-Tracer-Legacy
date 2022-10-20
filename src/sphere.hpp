@@ -9,9 +9,10 @@ class Sphere : public HittableObject
 	public:
 		Point3D centre;
 		double radius;
+		std::shared_ptr<Material> material;
 
 		Sphere();
-		Sphere(Point3D centre, double radius);
+		Sphere(Point3D centre, double radius, std::shared_ptr<Material> material);
 
 		virtual bool Hit(const Ray &ray, double tMin, double tMax, HitRecord &rec) const override;
 };

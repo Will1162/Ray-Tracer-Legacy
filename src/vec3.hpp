@@ -37,6 +37,7 @@ class Vec3
 		double LengthSquared() const;
 		Vec3 Random();
 		Vec3 Random(double min, double max);
+		bool NearZero() const;
 };
 
 Vec3 operator+(const Vec3 &u, const Vec3 &v);
@@ -51,6 +52,7 @@ Vec3 UnitVector(Vec3 v);
 Vec3 RandomInUnitSphere();
 Vec3 RandomInHemisphere(const Vec3 &normal);
 Vec3 RandomUnitVector();
+Vec3 Reflect(const Vec3 &v, const Vec3 &n);
 
 using Point3D = Vec3;
 using Colour = Vec3;

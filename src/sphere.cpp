@@ -8,10 +8,11 @@ Sphere::Sphere()
 	radius = 1.0;
 }
 
-Sphere::Sphere(Point3D centre, double radius)
+Sphere::Sphere(Point3D centre, double radius, std::shared_ptr<Material> material)
 {
 	this->centre = centre;
 	this->radius = radius;
+	this->material = material;
 }
 
 bool Sphere::Hit(const Ray &ray, double tMin, double tMax, HitRecord &rec) const
@@ -38,6 +39,7 @@ bool Sphere::Hit(const Ray &ray, double tMin, double tMax, HitRecord &rec) const
 	rec.point = ray.At(rec.t);
 	Vec3 outwardNormal = (rec.point - centre) / radius;
 	rec.SetFaceNormal(ray, outwardNormal);
+	rec.material = material;
 
 	return true;
 }

@@ -11,6 +11,7 @@ class Ray
 		Point3D origin;
 		Vec3 direction;
 
+		Ray();
 		Ray(const Point3D &origin, const Vec3 &direction);
 		Point3D At(double t) const;
 };

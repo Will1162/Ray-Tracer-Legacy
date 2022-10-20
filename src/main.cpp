@@ -5,6 +5,7 @@
 #include "colour.hpp"
 #include "globals.hpp"
 #include "hittable_object_list.hpp"
+#include "material.hpp"
 #include "ray.hpp"
 #include "sphere.hpp"
 #include "vec3.hpp"
@@ -16,8 +17,16 @@ int main()
 	char* imageFileName = (char*)"output.bmp";
 
 	HittableObjectList world;
-	world.Add(std::make_shared<Sphere>(Point3D(0, 0, -1), 0.5));
-	world.Add(std::make_shared<Sphere>(Point3D(0, -100.5, -1), 100));
+	
+	auto materialGround = std::make_shared<Lambertian>(Colour(0.8, 0.8, 0.0));
+    auto materialCenter = std::make_shared<Lambertian>(Colour(0.7, 0.3, 0.3));
+    auto materialLeft   = std::make_shared<Metal>(Colour(0.8, 0.8, 0.8));
+    auto materialRight  = std::make_shared<Metal>(Colour(0.8, 0.6, 0.2));
+
+	world.Add(std::make_shared<Sphere>(Point3D( 0.0, -100.5, -1.0), 100.0, materialGround));
+	world.Add(std::make_shared<Sphere>(Point3D( 0.0,    0.5, -1.0),   0.5, materialCenter));
+	world.Add(std::make_shared<Sphere>(Point3D(-0.9,    0.0, -1.0),   0.5, materialLeft));
+	world.Add(std::make_shared<Sphere>(Point3D( 0.9,    0.0, -1.0),   0.5, materialRight));
 
 	Camera cam;
 
