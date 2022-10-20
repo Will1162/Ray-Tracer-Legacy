@@ -41,16 +41,18 @@ class Metal : public Material
 {
 	public:
 		Colour albedo;
+		double fuzz;
 
-		Metal(const Colour& albedo)
+		Metal(const Colour& albedo, double fuzz)
 		{
 			this->albedo = albedo;
+			this->fuzz = (fuzz < 1) ? fuzz : 1;
 		}
 
 		virtual bool Scatter(const Ray& rayIn, const HitRecord& hitRecord, Colour& attenuation, Ray& scattered) const override
 		{
 			Vec3 reflected = Reflect(UnitVector(rayIn.direction), hitRecord.normal);
-			scattered = Ray(hitRecord.point, reflected);
+			scattered = Ray(hitRecord.point, reflected + fuzz * RandomInUnitSphere());
 			attenuation = albedo;
 			return (Dot(scattered.direction, hitRecord.normal) > 0);
 		}
