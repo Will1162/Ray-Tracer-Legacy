@@ -1,3 +1,4 @@
+#include <chrono>
 #include <stdio.h>
 
 #include "bitmap_io.hpp"
@@ -32,6 +33,8 @@ int main()
 
 	Camera cam;
 
+	std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+
 	int rowsDone = 0;
 	for (int i = 0; i < IMAGE_HEIGHT; i++)
 	{
@@ -50,8 +53,11 @@ int main()
 		}
 		
 		rowsDone++;
-		printf("Image done: %d%%\r", (int)(((float)rowsDone / (float)IMAGE_HEIGHT) * 100));
+		printf("Rendering: %d%%\r", (int)(((float)rowsDone / (float)IMAGE_HEIGHT) * 100));
 	}
+
+	std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+	printf("\nTime taken: %f s", (float)std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() / 1000000);
 
 	generateBitmapImage((unsigned char*)image, IMAGE_HEIGHT, IMAGE_WIDTH, imageFileName);
 
